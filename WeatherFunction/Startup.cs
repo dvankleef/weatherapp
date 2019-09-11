@@ -11,9 +11,13 @@ namespace WeatherFunction
     {
         public void Configure(IWebJobsBuilder builder)
         {
-            var apiKey = Environment.GetEnvironmentVariable("openWeatherApiKey", EnvironmentVariableTarget.Process);
+            
+            var config = new EnvironmentConfig
+            {
+                OwmApiKey = Environment.GetEnvironmentVariable("openWeatherApiKey", EnvironmentVariableTarget.Process)
+            };
 
-            builder.Services.AddSingleton(new CurrentWeather(apiKey));
+            builder.Services.AddSingleton(config);
 
         }
     }
