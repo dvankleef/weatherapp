@@ -11,12 +11,9 @@ namespace WeatherFunction
     {
         public override void Configure(IFunctionsHostBuilder builder)
         {
-            var config = new EnvironmentConfig
-            {
-                OwmApiKey = Environment.GetEnvironmentVariable("openWeatherApiKey", EnvironmentVariableTarget.Process)
-            };
+            var owmApiKey = Environment.GetEnvironmentVariable("openWeatherApiKey", EnvironmentVariableTarget.Process);
 
-            builder.Services.AddSingleton(config);
+            builder.Services.AddSingleton(new CurrentWeather(owmApiKey));
         }
     }
 }

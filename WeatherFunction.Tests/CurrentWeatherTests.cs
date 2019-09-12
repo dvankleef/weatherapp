@@ -21,7 +21,7 @@ namespace WeatherFunction.Tests
 
             //Act
             var function = new CurrentWeather("e92050a9ce9325edfca785d38239fe85");
-            var rootObject = await function.Run(request.Object, logger.Object, "soest", "key");
+            var rootObject = await function.Run(request.Object, logger.Object, "soest");
 
             //Assert
             Assert.NotNull(rootObject);
