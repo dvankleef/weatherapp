@@ -1,17 +1,22 @@
 using System;
-using Microsoft.Azure.Functions.Extensions.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Azure.WebJobs;
+using Microsoft.Azure.WebJobs.Hosting;
 using WeatherFunction;
+using Microsoft.Extensions.DependencyInjection;
 
-[assembly: FunctionsStartup(typeof(Startup))]
+[assembly: WebJobsStartup(typeof(WeatherFunction.Startup))]
 
 namespace WeatherFunction
 {
-    public class Startup : FunctionsStartup
+    public class Startup : IWebJobsStartup
     {
-        public override void Configure(IFunctionsHostBuilder builder)
+        public void Configure(IWebJobsBuilder builder)
         {
-            var owmApiKey = Environment.GetEnvironmentVariable("openWeatherApiKey", EnvironmentVariableTarget.Process);
+            var config = new EnvironmentConfig
+            {
+                OwmApiKey = Environment.GetEnvironmentVariable("openWeatherApiKey", EnvironmentVariableTarget.Process)
+            };
+            builder.Services.AddSingleton(config);
         }
     }
 }
