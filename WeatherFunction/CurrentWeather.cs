@@ -12,13 +12,6 @@ namespace WeatherFunction
 {
     public class CurrentWeather
     {
-        private string _apiKey;
-
-        public CurrentWeather(string apiKey)
-        {
-            _apiKey = apiKey;
-        }
-
         [FunctionName("CurrentWeather")]
         public async Task<WeatherRootObject> Run(
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = "{city}/{apiKey}")]
